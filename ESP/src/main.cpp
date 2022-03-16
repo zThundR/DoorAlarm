@@ -1,12 +1,18 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Ultrasonic.h>
-Ultrasonic ultrasonic(D2, D3);
+
+#define trigPin D1
+#define echoPin D2
+
+Ultrasonic ultrasonic(trigPin, echoPin);
+long durata, cm;
+
 
 void setup()
 {
-    Serial.begin(115200);
-    Serial.println();
+    Serial.begin(9600);
+    /*Serial.println();
 
     WiFi.begin("martino", "12345678");
 
@@ -19,11 +25,21 @@ void setup()
     Serial.println();
 
     Serial.print("Connesso, indirizzo IP: ");
-    Serial.println(WiFi.localIP());
+    Serial.println(WiFi.localIP());*/
+
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+    digitalWrite(trigPin, LOW);
 }
 
 void loop() {
-    Serial.println("Numero: ");
-    Serial.println(ultrasonic.Ranging(CM));
-    delay(100);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+    
+    unsigned long time = pulseIn(echoPin, HIGH);
+    cm = 0.03438 * time / 2;
+
+    Serial.println("Distanza: " + String(cm) + " cm");
+    delay(500);
 }
