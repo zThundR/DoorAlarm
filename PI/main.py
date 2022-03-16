@@ -78,8 +78,6 @@ if __name__ == "__main__":
 
     host = "10.11.137.56"
     port = 8123
-    cont = 0
-    tfile = []
 
     sel = selectors.DefaultSelector()  # inizializza il selettore
     # ...
