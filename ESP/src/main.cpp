@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <Ultrasonic.h>
+Ultrasonic ultrasonic(D2, D3);
 
 void setup()
 {
@@ -21,5 +23,7 @@ void setup()
 }
 
 void loop() {
-    
+    Serial.println("Numero: ");
+    Serial.println(ultrasonic.Ranging(CM));
+    delay(100);
 }
