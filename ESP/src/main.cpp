@@ -29,7 +29,6 @@ void setup()
 
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
-    digitalWrite(trigPin, LOW);
 }
 
 void loop() {
