@@ -21,7 +21,7 @@ def prec():
                 try:
                     data = conn.recv(1024)  # Riceve i dati
                 except:
-                    print("stu strunz si voleva disconnettere")
+                    print("[ERROR]")
                 if not data:  # disconnessione
 
                     break
@@ -36,10 +36,10 @@ def service_connection(key, mask):
         try:
             recv_data = sock.recv(1024)  # Riceve un pacchetto di 1024
         except ConnectionResetError:
-            print("[ERROR] stu strunz s'volev disconnett (Connection reset by peer)")
+            print("[ERROR]")
             recv_data = None  # Avoiding fake data from coming in
         except:
-            print("[ERROR] E che cazz (Probabilmente no route to host)")
+            print("[ERROR]")
             recv_data = None
 
         if recv_data:
