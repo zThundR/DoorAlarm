@@ -12,9 +12,23 @@ long secondo = millis();
 long ultimaMisura = 0;
 
 const String host = "10.11.137.86";
-const char* ssid = "martino";
-const char* password = "12345678";
+const char* ssid = "iPhone di Giovanni";
+const char* password = "ciao1234";
 WiFiClient espClient;
+
+void write(WiFiClient* client, String motivation) {
+
+    String stringToSend = "{ \"motivation\": \"" + motivation + "\"}";
+    (*client).connect("https://pqixajpbmuqgrkovbltu.supabase.co/rest/v1/Alarm?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxaXhhanBibXVxZ3Jrb3ZibHR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUyNjIxNDEsImV4cCI6MTk2MDgzODE0MX0.GQqXcVBRwH87amPzRhwhDuGSNns7r7nt3vTD8Yo3znU&Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxaXhhanBibXVxZ3Jrb3ZibHR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUyNjIxNDEsImV4cCI6MTk2MDgzODE0MX0.GQqXcVBRwH87amPzRhwhDuGSNns7r7nt3vTD8Yo3znU&Content-Type=application/json&Prefer=return=representation", 443);
+    
+    while (!(*client).connected()) {
+        Serial.print("francomerda.\n");
+    }
+
+    (*client).print(stringToSend);
+    (*client).stop();
+
+}
 
 void wifi() {
     delay(10);
@@ -26,13 +40,15 @@ void wifi() {
 }
 
 void setup() {
-    Serial.begin(115200);
+    Serial.begin(9600);
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
     wifi();
+    write(&espClient, "stocazzo");
 }
 
 void loop() {
+    /*
     if(espClient.connect(host, 8123)) {
         while(espClient.connected()) {
             if(espClient.available()) {
@@ -66,5 +82,5 @@ void loop() {
                 }
             }
         }
-    }
+    }*/
 }
